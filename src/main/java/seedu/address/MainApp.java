@@ -83,7 +83,7 @@ public class MainApp extends Application {
      * Global instance of the HTTP transport.
      */
     private static HttpTransport httpTransport;
-
+    private static final List<String> SCOPES = Arrays.asList(CalendarScopes.CALENDAR_READONLY);
     public static final Version VERSION = new Version(1, 1, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
@@ -302,8 +302,7 @@ public class MainApp extends Application {
      * If modifying these scopes, delete your previously saved credentials
      * at ~/.credentials/calendar-java-quickstart
      */
-    private static final List<String> SCOPES =
-            Arrays.asList(CalendarScopes.CALENDAR_READONLY);
+
 
     static {
         try {
