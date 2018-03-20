@@ -60,12 +60,12 @@ public class MainApp extends Application {
     /**
      * Application name.
      */
-    final private static String APPLICATION_NAME = "NUSCouples";
+    private final static String APPLICATION_NAME = "NUSCouples";
 
     /**
      * Directory to store user credentials for this application.
      */
-    final private static java.io.File DATA_STORE_DIR = new java.io.File(
+    private final static java.io.File DATA_STORE_DIR = new java.io.File(
             System.getProperty("user.home"), ".credentials/calendar-java-quickstart");
 
     /**
