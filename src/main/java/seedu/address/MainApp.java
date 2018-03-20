@@ -60,18 +60,18 @@ public class MainApp extends Application {
     /**
      * Application name.
      */
-    private final static String APPLICATION_NAME = "NUSCouples";
+    private  static final String APPLICATION_NAME = "NUSCouples";
 
     /**
      * Directory to store user credentials for this application.
      */
-    private final static java.io.File DATA_STORE_DIR = new java.io.File(
+    private  static final java.io.File DATA_STORE_DIR = new java.io.File(
             System.getProperty("user.home"), ".credentials/calendar-java-quickstart");
 
     /**
      * Global instance of the {@link FileDataStoreFactory}.
      */
-    private static FileDataStoreFactory DATASTOREFACTORY;
+    private static FileDataStoreFactory dataStoreFactory;
 
     /**
      * Global instance of the JSON factory.
@@ -82,7 +82,7 @@ public class MainApp extends Application {
     /**
      * Global instance of the HTTP transport.
      */
-    private static HttpTransport HTTPTRANSPORT;
+    private static HttpTransport httpTransport;
 
     public static final Version VERSION = new Version(1, 1, 0, true);
 
@@ -307,8 +307,8 @@ public class MainApp extends Application {
 
     static {
         try {
-            HTTPTRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
-            DATASTOREFACTORY = new FileDataStoreFactory(DATA_STORE_DIR);
+            httpTransport = GoogleNetHttpTransport.newTrustedTransport();
+            dataStoreFactory = new FileDataStoreFactory(DATA_STORE_DIR);
         } catch (Throwable t) {
             t.printStackTrace();
             System.exit(1);
@@ -331,8 +331,8 @@ public class MainApp extends Application {
         // Build flow and trigger user authorization request.
         GoogleAuthorizationCodeFlow flow =
                 new GoogleAuthorizationCodeFlow.Builder(
-                        HTTPTRANSPORT, JSON_FACTORY, clientSecrets, SCOPES)
-                        .setDataStoreFactory(DATASTOREFACTORY)
+                        httpTransport, JSON_FACTORY, clientSecrets, SCOPES)
+                        .setDataStoreFactory(dataStoreFactory)
                         .setAccessType("offline")
                         .build();
         Credential credential = new AuthorizationCodeInstalledApp(
@@ -345,18 +345,20 @@ public class MainApp extends Application {
     /**
      * Build and return an authorized Calendar client service.
      *
-     * @return an authorized Calendar client service
+             * @return an authorized Calendar client service
      * @throws IOException
      */
     public static com.google.api.services.calendar.Calendar
-    getCalendarService() throws IOException {
+        getCalendarService() throws IOException {
         Credential credential = authorize();
         return new com.google.api.services.calendar.Calendar.Builder(
-                HTTPTRANSPORT, JSON_FACTORY, credential)
+                httpTransport, JSON_FACTORY, credential)
                 .setApplicationName(APPLICATION_NAME)
                 .build();
     }
-
+    /**
+     * Main method
+     */
     public static void main(String[] args) {
 
         launch(args);
