@@ -58,14 +58,6 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
     public static final Version VERSION = new Version(1, 1, 0, true);
-
-    protected Ui ui;
-    protected Logic logic;
-    protected Storage storage;
-    protected Model model;
-    protected Config config;
-    protected UserPrefs userPrefs;
-
     /**
      * Application name.
      */
@@ -85,17 +77,21 @@ public class MainApp extends Application {
     /**
      * Global instance of the JSON factory.
      */
-    private static final JsonFactory JSON_FACTORY =
-            JacksonFactory.getDefaultInstance();
+    private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
 
     /**
      * Global instance of the HTTP transport.
      */
     private static HttpTransport httpTransport;
     private static final List<String> SCOPES = Arrays.asList(CalendarScopes.CALENDAR_READONLY);
-
-
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
+
+    protected Ui ui;
+    protected Logic logic;
+    protected Storage storage;
+    protected Model model;
+    protected Config config;
+    protected UserPrefs userPrefs;
 
 
     @Override
