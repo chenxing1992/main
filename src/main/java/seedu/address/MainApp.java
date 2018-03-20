@@ -57,15 +57,24 @@ import seedu.address.ui.UiManager;
  * The main entry point to the application.
  */
 public class MainApp extends Application {
+    public static final Version VERSION = new Version(1, 1, 0, true);
+
+    protected Ui ui;
+    protected Logic logic;
+    protected Storage storage;
+    protected Model model;
+    protected Config config;
+    protected UserPrefs userPrefs;
+
     /**
      * Application name.
      */
-    private  static final String APPLICATION_NAME = "NUSCouples";
+    private static final String APPLICATION_NAME = "NUSCouples";
 
     /**
      * Directory to store user credentials for this application.
      */
-    private  static final java.io.File DATA_STORE_DIR = new java.io.File(
+    private static final java.io.File DATA_STORE_DIR = new java.io.File(
             System.getProperty("user.home"), ".credentials/calendar-java-quickstart");
 
     /**
@@ -84,16 +93,9 @@ public class MainApp extends Application {
      */
     private static HttpTransport httpTransport;
     private static final List<String> SCOPES = Arrays.asList(CalendarScopes.CALENDAR_READONLY);
-    public static final Version VERSION = new Version(1, 1, 0, true);
+
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
-
-    protected Ui ui;
-    protected Logic logic;
-    protected Storage storage;
-    protected Model model;
-    protected Config config;
-    protected UserPrefs userPrefs;
 
 
     @Override
@@ -344,17 +346,18 @@ public class MainApp extends Application {
     /**
      * Build and return an authorized Calendar client service.
      *
-             * @return an authorized Calendar client service
+     * @return an authorized Calendar client service
      * @throws IOException
      */
     public static com.google.api.services.calendar.Calendar
-        getCalendarService() throws IOException {
+    getCalendarService() throws IOException {
         Credential credential = authorize();
         return new com.google.api.services.calendar.Calendar.Builder(
                 httpTransport, JSON_FACTORY, credential)
                 .setApplicationName(APPLICATION_NAME)
                 .build();
     }
+
     /**
      * Main method
      */
