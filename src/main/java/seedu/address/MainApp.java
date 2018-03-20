@@ -57,6 +57,32 @@ import seedu.address.ui.UiManager;
  * The main entry point to the application.
  */
 public class MainApp extends Application {
+    /**
+     * Application name.
+     */
+    final private static String APPLICATION_NAME = "NUSCouples";
+
+    /**
+     * Directory to store user credentials for this application.
+     */
+    final private static java.io.File DATA_STORE_DIR = new java.io.File(
+            System.getProperty("user.home"), ".credentials/calendar-java-quickstart");
+
+    /**
+     * Global instance of the {@link FileDataStoreFactory}.
+     */
+    private static FileDataStoreFactory DATASTOREFACTORY;
+
+    /**
+     * Global instance of the JSON factory.
+     */
+    private static final JsonFactory JSON_FACTORY =
+            JacksonFactory.getDefaultInstance();
+
+    /**
+     * Global instance of the HTTP transport.
+     */
+    private static HttpTransport HTTPTRANSPORT;
 
     public static final Version VERSION = new Version(1, 1, 0, true);
 
@@ -96,6 +122,9 @@ public class MainApp extends Application {
         initEventsCenter();
     }
 
+    /**
+     * This method will authenticate with Google API console
+     */
     public void reqAutorization() {
 
         // Build a new authorized API client service.
@@ -266,33 +295,6 @@ public class MainApp extends Application {
         this.stop();
     }
 
-    /**
-     * Application name.
-     */
-    private static final String APPLICATION_NAME =
-            "Google Calendar API Java Quickstart";
-
-    /**
-     * Directory to store user credentials for this application.
-     */
-    private static final java.io.File DATA_STORE_DIR = new java.io.File(
-            System.getProperty("user.home"), ".credentials/calendar-java-quickstart");
-
-    /**
-     * Global instance of the {@link FileDataStoreFactory}.
-     */
-    private static FileDataStoreFactory DATASTOREFACTORY;
-
-    /**
-     * Global instance of the JSON factory.
-     */
-    private static final JsonFactory JSON_FACTORY =
-            JacksonFactory.getDefaultInstance();
-
-    /**
-     * Global instance of the HTTP transport.
-     */
-    private static HttpTransport HTTPTRANSPORT;
 
     /**
      * Global instance of the scopes required by this quickstart.
