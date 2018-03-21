@@ -54,6 +54,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
+        Quickstart.run();
         logger.info("=============================[ Initializing AddressBook ]===========================");
         super.init();
 
@@ -205,7 +206,6 @@ public class MainApp extends Application {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         this.stop();
     }
-
     /**
      * Main method
      */
