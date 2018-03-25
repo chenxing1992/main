@@ -1,8 +1,11 @@
 language: java
+
+before_install:
+    - chmod +x /.gradlew
+
 matrix:
   include:
     - jdk: oraclejdk8
-
 
 script: >-
     ./config/travis/run-checks.sh &&
