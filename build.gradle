@@ -49,18 +49,19 @@ jacocoTestReport {
 
 dependencies {
     apply plugin:  'idea'
-    String testFxVersion = '4.0.7-alpha'
+    String testFxVersion = '4.0.13-alpha'
+
+    compile 'com.google.api-client:google-api-client:1.23.0'
+    compile 'com.google.oauth-client:google-oauth-client-jetty:1.23.0'
+    compile 'com.google.apis:google-api-services-calendar:v3-rev298-1.23.0'
 
     compile group: 'org.fxmisc.easybind', name: 'easybind', version: '1.0.3'
     compile group: 'org.controlsfx', name: 'controlsfx', version: '8.40.11'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.7.0'
     compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.7.4'
     compile group: 'com.google.guava', name: 'guava', version: '19.0'
-
     compile group: 'com.joestelmach', name: 'natty', version: '0.12'
-    compile 'com.google.api-client:google-api-client:1.23.0'
-    compile 'com.google.oauth-client:google-oauth-client-jetty:1.23.0'
-    compile 'com.google.apis:google-api-services-calendar:v3-rev298-1.23.0'
+
 
 
 
