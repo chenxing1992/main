@@ -3,6 +3,8 @@ matrix:
   include:
     - jdk: oraclejdk8
 
+before_install:
+  - chmod +x /.gradlew
 script: >-
     ./config/travis/run-checks.sh &&
     travis_retry ./gradlew clean checkstyleMain checkstyleTest headless allTests coverage coveralls asciidoctor copyDummySearchPage
@@ -29,5 +31,3 @@ cache:
     - $HOME/.gradle/wrapper/
 
 
-before_install:
-  - chmod +x /.gradlew
