@@ -1,14 +1,12 @@
 language: java
 matrix:
-  before_install:
-    - chmod +x /.gradlew
   include:
     - jdk: oraclejdk8
 
 
 script: >-
     ./config/travis/run-checks.sh &&
-    travis_retry ./gradlew clean checkstyleMain checkstyleTest headless allTests
+    travis_retry ./gradlew clean checkstyleMain checkstyleTest headless allTests coverage coveralls asciidoctor copyDummySearchPage
 
 deploy:
   skip_cleanup: true
