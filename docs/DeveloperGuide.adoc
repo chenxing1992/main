@@ -14,24 +14,13 @@ endif::[]
 
 By: `Team T09-B4`      Since: `Feb 2018`      Licence: `MIT`
 
-== Introduction
-Welcome to our developer guide for NUSCouples!!
-Over the time in NUS, our team has witness many breakups in NUS due to various difficulties to balance school work and their relationship. Which is heartbreaking!
-Thus, we have developed this desktop application so that it can help them store their memories and keep each other updated!
-NUSCouples App is a command-line application that can provide convenient ways to manipulate the data. Moreover, we try to keep every command as simple as it can to accommodate users that are not familiar with CLI interface.
-This developer guide contains information that can help developers to get started as a NUSCouples contributor even if you are an experienced developer.
-If you face any uncertainty in the instructions, feel free to email to marlene.koh@u.nus.edu, our friendly and pretty assistant will help you to sort out the issues for you accordingly.
+Welcome to the developer guide for _NUSCouples_!
 
-*This developer guide consist of following sections:*
+_NUSCouples_ is a command-line desktop application targeted at couples studying at the National University of Singapore (NUS).
+It aims to help these couples create and remember new memories during their time in NUS.
 
-* <<Setting up>>
-* <<Design>>
-* <<Implementation>>
-* <<Documentation>>
-* <<Testing>>
-* <<Dev Ops>>
-
-
+This developer guide contains information that can help you to get started as a contributor to _NUSCouples_, as well as more about
+the software architecture and feature implementation of _NUSCouples_.
 
 == Setting up
 
@@ -407,9 +396,9 @@ Certain properties of the application can be controlled (e.g App name, logging l
 === [Proposed] Calendar Viewer Feature
 ==== Current Implementation
 The Calendar Viewer mechanism is facilitated by `Google Calendar API` and reside in the `ModelManager`.
-It supports viewing/add/editing/deleting capability that modifies the state of the NUSCouples App.
+It supports viewing/add/editing/deleting capability that modifies the state of _NUSCouples_.
 Firstly, it uses OAuth 2.0 endpoints to allow users to share specific data with the application while keeping their usernames, passwords, and other information private. For example, an application can use OAuth 2.0 to obtain permission from users to store files in their Google Drives which sync to the calendar.
-This implementation requires the user to connect to the internet because NUSCouples app needs to open the system browser and supply a local redirect URI to handle responses from Google's authorization server.
+This implementation requires the user to connect to the internet because _NUSCouples_ needs to open the system browser and supply a local redirect URI to handle responses from Google's authorization server.
 
 *Basic steps*
 
@@ -458,7 +447,7 @@ image::viewCalendarSeqDiagram.png[width="850"]
 ==== Proposed Implementation
 The Timetable Viewer feature is implemented by `Timetable`, which will reside in `ModelManager`.
 
-Users are able to add a shortened https://nusmods.com/[NUSMods] timetable URL to their existing partner in NUSCouples. +
+Users are able to add a shortened https://nusmods.com/[NUSMods] timetable URL to their existing partner in _NUSCouples_. +
 
  Sample shortened NUSMods URL: http://modsn.us/wNuIW
 
@@ -986,9 +975,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |pair of NUS students in a relationship |locate my partner from his NUS timetable |easily meet up with my partner on campus
 
-|`* * *` |user who values their privacy |encrypt my NUSCouples save data |prevent strangers from reading personal information such as my journal entries
+|`* *` |user who values their privacy |encrypt _NUSCouples_ save data |prevent strangers from reading personal information such as my journal entries
 
-|`* * *` |As a part of a couple in NUS |encrypt my NUSCouples save data |prevent strangers from reading personal information such as my journal entries
+|`* *` |As a part of a couple in NUS |encrypt _NUSCouples_ save data |prevent strangers from reading personal information such as my journal entries
 
 |`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
 
@@ -1014,38 +1003,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 *MSS*
 
-1. User are required to generate and download their credential from google API credentials: https://console.developers.google.com/apis/dashboard?
-2. User are required to import their credential into the project resources directory.
-3. NUSCouples add the credential of the User to authenticate with Google.
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 1a. The partner already has an existing google calendar hosted in google.
-+
-[none]
-** 1a1. NUSCouples redirects to google calendar account to authenticate using the user credential.
-** 1a2. User confirms change.
-+
-Use case resumes at step 2.
-
-* 1b. The given credential is invalid.
-+
-[none]
-** 1b1. NUSCouples shows an error message and close.
-+
-Use case ends.
-
-discrete]
-=== Use case: View Calendar User of User
-
-*MSS*
-
-1.User inside browser panel enter's the command to view calendar.
-2.NUSCouple redirects to google Calendar to retrieve data.
-3.NUSCouple Display the UI accordingly.
+1. User are required to generate and download their credential from google API credentials: https://console.developers.google.com/apis/dashboard?[Google Dashboard] and import into project resource directory.
+2. NusCouples use the credential to authenticate with Google API using Auth2.0.
 
 +
 Use case ends.
@@ -1058,7 +1017,6 @@ Use case ends.
 [none]
 ** 1a1. NUSCouples redirects to google calendar account to authenticate using the user credential.
 ** 1a2. User confirms change.
-** 1a3. NUSCouples list the calendar in browser panel.
 +
 Use case resumes at step 2.
 
@@ -1070,30 +1028,32 @@ Use case resumes at step 2.
 Use case ends.
 
 [discrete]
-=== Use case: Add Timetable to Partner
+=== Use case: View Calendar of User
 
 *MSS*
 
-1.  User request to add a shortened http://nusmods.com[NUSMODS] timetable url to his/her partner.
-2.  NUSCouples adds the url to the partner.
+1.User inside browser panel enter's the command to view calendar.
+2.NUSCouple redirects to google Calendar to retrieve data and display the UI accordingly.
+
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 1a. The partner already has a timetable.
+* 1a. The partner already has an existing google calendar hosted in google.
 +
 [none]
-** 1a1. NUSCouples prompts user to override existing timetable.
+** 1a1. _NUSCouples_ redirects to google calendar account to authenticate using the user credential.
 ** 1a2. User confirms change.
+** 1a3. _NUSCouples_ list the calendar in browser panel.
 +
 Use case resumes at step 2.
 
-* 1b. The given url is invalid.
+* 1b. The given credential is invalid.
 +
 [none]
-** 1b1. NUSCouples shows an error message.
+** 1b1. _NUSCouples_ shows an error message and close.
 +
 Use case ends.
 
@@ -1103,7 +1063,7 @@ Use case ends.
 *MSS*
 
 1.  User requests to view timetable of his/her partner.
-2.  NUSCouples displays the timetable.
+2.  _NUSCouples_ displays the timetable.
 +
 Use case ends.
 
@@ -1113,7 +1073,7 @@ Use case ends.
 * 1a. The specified person does not have a timetable.
 +
 [none]
-** 1a1. NUSCouples shows an error message.
+** 1a1. _NUSCouples_ shows an error message.
 +
 Use case ends.
 
