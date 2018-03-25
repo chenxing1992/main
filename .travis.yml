@@ -34,4 +34,5 @@ task wrapper(type: Wrapper) {
 }
 
 before_install:
+  - ls -la
   - chmod +x /.gradlew
