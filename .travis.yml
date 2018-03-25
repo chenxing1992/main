@@ -27,3 +27,11 @@ cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.6'
+
+}
+
+before_install:
+  - chmod +x /.gradlew
