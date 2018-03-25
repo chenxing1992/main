@@ -14,6 +14,25 @@ endif::[]
 
 By: `Team T09-B4`      Since: `Feb 2018`      Licence: `MIT`
 
+== Introduction
+Welcome to our developer guide for NUSCouples!!
+Over the time in NUS, our team has witness many breakups in NUS due to various difficulties to balance school work and their relationship. Which is heartbreaking!
+Thus, we have developed this desktop application so that it can help them store their memories and keep each other updated!
+NUSCouples App is a command-line application that can provide convenient ways to manipulate the data. Moreover, we try to keep every command as simple as it can to accommodate users that are not familiar with CLI interface.
+This developer guide contains information that can help developers to get started as a NUSCouples contributor even if you are an experienced developer.
+If you face any uncertainty in the instructions, feel free to email to marlene.koh@u.nus.edu, our friendly and pretty assistant will help you to sort out the issues for you accordingly.
+
+*This developer guide consist of following sections:*
+
+* <<Setting up>>
+* <<Design>>
+* <<Implementation>>
+* <<Documentation>>
+* <<Testing>>
+* <<Dev Ops>>
+
+
+
 == Setting up
 
 === Prerequisites
@@ -991,6 +1010,66 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 (For all use cases below, the *System* is the `NUSCouples` app and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
+=== Use case: Authenticate User with Google
+
+*MSS*
+
+1. User are required to generate and download their credential from google API credentials: https://console.developers.google.com/apis/dashboard?
+2. User are required to import their credential into the project resources directory.
+3. NUSCouples add the credential of the User to authenticate with Google.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The partner already has an existing google calendar hosted in google.
++
+[none]
+** 1a1. NUSCouples redirects to google calendar account to authenticate using the user credential.
+** 1a2. User confirms change.
++
+Use case resumes at step 2.
+
+* 1b. The given credential is invalid.
++
+[none]
+** 1b1. NUSCouples shows an error message and close.
++
+Use case ends.
+
+discrete]
+=== Use case: View Calendar User of User
+
+*MSS*
+
+1.User inside browser panel enter's the command to view calendar.
+2.NUSCouple redirects to google Calendar to retrieve data.
+3.NUSCouple Display the UI accordingly.
+
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The partner already has an existing google calendar hosted in google.
++
+[none]
+** 1a1. NUSCouples redirects to google calendar account to authenticate using the user credential.
+** 1a2. User confirms change.
+** 1a3. NUSCouples list the calendar in browser panel.
++
+Use case resumes at step 2.
+
+* 1b. The given credential is invalid.
++
+[none]
+** 1b1. NUSCouples shows an error message and close.
++
+Use case ends.
+
+[discrete]
 === Use case: Add Timetable to Partner
 
 *MSS*
@@ -1051,11 +1130,12 @@ Use case ends.
 .  Should be able to work on both 32-bit and 64-bit environments.
 .  Should have commands that are intuitive and easy to remember.
 .  Should be able to control almost everything from the CLI.
+.  The application should be connected to the internet.
 
 [appendix]
 == Glossary
 [[mainstream-os]] Mainstream OS::
-Windows, Linux, Unix, OS-X
+Windows, Linux, Unix, OS-X, NUSMods, Google Calendar
 
 [[private-contact-detail]] Private contact detail::
 A contact detail that is not meant to be shared with others
