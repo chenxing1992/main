@@ -1,8 +1,6 @@
 language: java
 matrix:
   include:
-  before_install:
-    - chmod +x /.gradlew
     - jdk: oraclejdk8
 
 script: >-
