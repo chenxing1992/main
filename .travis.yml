@@ -7,7 +7,7 @@ matrix:
 
       before_install:
         gradle -b wrapper.gradle wrapper
-        - chmod +x /.gradlew
+       
 script: >-
     ./config/travis/run-checks.sh &&
     travis_retry ./gradlew clean checkstyleMain checkstyleTest headless allTests coverage coveralls asciidoctor copyDummySearchPage
