@@ -56,6 +56,9 @@ dependencies {
     compile group: 'com.google.guava', name: 'guava', version: '19.0'
 
     compile group: 'com.joestelmach', name: 'natty', version: '0.12'
+    compile group: 'com.google.api-client', name: 'google-api-client', version: '1.23.0'
+    compile group: 'com.google.oauth-client', name: 'google-oauth-client-jetty', version: '1.23.0'
+    compile group: 'com.google.apis', name: 'google-api-services-calendar', version: 'v3-rev298-1.23.0'
 
 
 
@@ -91,6 +94,7 @@ task coverage(type: JacocoReport) {
             fileTree(dir: it, exclude: ['**/*.jar'])
         })
     }
+
     reports {
         html.enabled = true
         xml.enabled = true
