@@ -52,4 +52,17 @@ public class Assert {
         void call() throws Exception;
     }
 
+    //@@author marlenekoh
+    /**
+     * Asserts that the {@code callable} does not throw any exception.
+     */
+    public static void assertDoesNotThrow(VoidCallable callable) {
+        try {
+            callable.call();
+        } catch (Throwable unexpectedException) {
+            String errorMessage = String.format("Expected nothing thrown, however %s thrown",
+                    unexpectedException.getMessage());
+            throw new AssertionFailedError(errorMessage);
+        }
+    }
 }

@@ -1,8 +1,5 @@
 package seedu.address.logic.commands;
 
-import javax.swing.JFrame;
-
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.ui.JournalWindow;
 
 /**
@@ -13,15 +10,13 @@ public class NewJournal extends Command {
     public static final String COMMAND_WORD = "new";
     public static final String COMMAND_ALIAS = "n";
 
+    public static final String NEW_JOURNAL_ENTRY_CREATED = "New Journal Entry Created.";
+
     @Override
-    public CommandResult execute() throws CommandException {
-        JFrame frame = new JournalWindow();
-        frame.setTitle("Journal");
-        frame.setVisible(true);
-        frame.setSize(720, 480);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setResizable(true);
-        frame.setLocationRelativeTo(null);
-        return null;
+    public CommandResult execute() {
+        JournalWindow journalWindow = new JournalWindow();
+        journalWindow.show();
+
+        return new CommandResult(NEW_JOURNAL_ENTRY_CREATED);
     }
 }

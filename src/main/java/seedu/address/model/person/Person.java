@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.person.timetable.Timetable;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -19,18 +20,20 @@ public class Person {
     private final Phone phone;
     private final Email email;
     private final Address address;
+    private final Timetable timetable;
 
     private final UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Timetable timetable, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, timetable, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.timetable = timetable;
         // protect internal tags from changes in the arg list
         this.tags = new UniqueTagList(tags);
     }
@@ -49,6 +52,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Timetable getTimetable() {
+        return timetable;
     }
 
     /**
@@ -73,13 +80,14 @@ public class Person {
         return otherPerson.getName().equals(this.getName())
                 && otherPerson.getPhone().equals(this.getPhone())
                 && otherPerson.getEmail().equals(this.getEmail())
-                && otherPerson.getAddress().equals(this.getAddress());
+                && otherPerson.getAddress().equals(this.getAddress())
+                && otherPerson.getTimetable().equals(this.getTimetable());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, timetable, tags);
     }
 
     @Override
@@ -92,6 +100,8 @@ public class Person {
                 .append(getEmail())
                 .append(" Address: ")
                 .append(getAddress())
+                .append(" Timetable: ")
+                .append(getTimetable())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

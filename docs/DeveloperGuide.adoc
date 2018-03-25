@@ -12,7 +12,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2103JAN2018-T09-B4/main
 
-By: `Team T09-B4`      Since: `Feb 2018`      Licence: `NUS School Of Computing `
+By: `Team T09-B4`      Since: `Feb 2018`      Licence: `MIT`
 
 == Setting up
 
@@ -440,11 +440,11 @@ image::viewCalendarSeqDiagram.png[width="850"]
 The Timetable Viewer feature is implemented by `Timetable`, which will reside in `ModelManager`.
 
 Users are able to add a shortened https://nusmods.com/[NUSMods] timetable URL to their existing partner in NUSCouples. +
-[none]
+
  Sample shortened NUSMods URL: http://modsn.us/wNuIW
 
 We pass the shortened URL through a `HttpURLConnection` to get the expanded URL. +
-[none]
+
  Sample expanded NUSMods URL: https://nusmods.com/timetable/sem-2/share?CS2101=SEC:C01&CS2103T=TUT:C01&…
 
 The expanded NUSMods URL can be generalised and represented in the format
@@ -478,7 +478,41 @@ image::AddTimetableSequenceDiagram.png[width="650"]
 ** Pros: Easier to implement due to how NUSMods API is structured.
 ** Cons: Difficult to extract out information for a particular time slot on a particular day.
 
-=== [Proposed]
+=== [Proposed] Journal feature
+==== Current Implementation
+
+The journal feature is implemented by a `Journal`, which resides inside `ModelManager`. It allows the user to create and save journal entries.
+
+//insert class diagram here
+//image::LogicCommandClassDiagram.png[width="800"]
+
+As you can see from the diagram,
+
+Suppose that the user has just launched the application for the first time. The `Journal` will be empty at the beginning.
+
+The following sequence diagram shows how the newJournal operation works:
+
+image::JournalWindowUIComponentSequenceDiagram.png[width="800"]
+
+==== Design Considerations
+
+===== Aspect: Implementation of `JournalWindow`
+
+* **Alternative 1:** Use javafx to directly make a new window.
+** Pros: Easy to implement. Only requires a few lines of code in one or two files.
+** Cons: Not consistent with the rest of the app. Needs more effort to maintain when changes are made.
+* **Alternative 2:** Make use of the UI framework.
+** Pros: Consistent with rest of app.
+** Cons: Harder to implement. Requires understanding of the UI component. Required minor edits in many files.
+
+===== Aspect: Naming of journal entries
+
+* **Alternative 1 (current choice):** Automatically uses current date "YYYYMMDD" as file name.
+** Pros: No need to worry about duplicate names. Easy to implement filtering (can filter by value easily).
+** Cons: Lack of personalisation. Hard to distinguish between files.
+* **Alternative 2:** Allow user to name journal entries.
+** Pros: User can distinguish between files easily.
+** Cons: If duplicate names are allowed, we need to distinguish them with another method. If duplicate names are not allowed, user may struggle to find unique names for every entry.
 
 === [Proposed]
 

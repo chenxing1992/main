@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <scene>
+        <Scene>
+            <ScrollPane>
+                <AnchorPane fx:id="journalTextPlaceholder" prefHeight="400" maxHeight="600"/>
+            </ScrollPane>
+        </Scene>
+    </scene>
+</fx:root>
+

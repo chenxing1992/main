@@ -6,6 +6,7 @@ import java.util.function.BooleanSupplier;
 import org.testfx.api.FxRobot;
 
 import guitests.guihandles.exceptions.StageNotFoundException;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 /**
@@ -15,7 +16,7 @@ import javafx.stage.Stage;
 public class GuiRobot extends FxRobot {
 
     private static final int PAUSE_FOR_HUMAN_DELAY_MILLISECONDS = 250;
-    private static final int DEFAULT_WAIT_FOR_EVENT_TIMEOUT_MILLISECONDS = 5000;
+    private static final int DEFAULT_WAIT_FOR_EVENT_TIMEOUT_MILLISECONDS = 10000;
 
     private static final String PROPERTY_TESTFX_HEADLESS = "testfx.headless";
 
@@ -78,6 +79,14 @@ public class GuiRobot extends FxRobot {
         return listTargetWindows().stream()
                 .filter(window -> window instanceof Stage && ((Stage) window).getTitle().equals(stageTitle))
                 .count() >= 1;
+    }
+
+    /**
+     * Removes focus from the current stage that is in focus.
+     */
+    public void removeFocus() {
+        press(KeyCode.ALT, KeyCode.TAB);
+        release(KeyCode.ALT, KeyCode.TAB);
     }
 
     /**
