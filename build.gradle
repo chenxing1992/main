@@ -48,6 +48,7 @@ jacocoTestReport {
 
 
 dependencies {
+    apply plugin:  'idea'
     String testFxVersion = '4.0.7-alpha'
 
     compile group: 'org.fxmisc.easybind', name: 'easybind', version: '1.0.3'
