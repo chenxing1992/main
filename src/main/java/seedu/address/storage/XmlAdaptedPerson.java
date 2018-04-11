@@ -34,7 +34,6 @@ public class XmlAdaptedPerson {
     private String address;
     @XmlElement(required = true)
     private String timetable;
-
     @XmlElement
     private List<XmlAdaptedAppointment> appointments = new ArrayList<>();
 
@@ -47,12 +46,13 @@ public class XmlAdaptedPerson {
     /**
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
-    public XmlAdaptedPerson(String name, String phone, String email, String address, String timetable) {
+    public XmlAdaptedPerson(String name, String phone, String email, String address, String timetable, List<XmlAdaptedAppointment> appointments) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.timetable = timetable;
+        this.appointments = appointments;
     }
 
     /**
@@ -67,6 +67,9 @@ public class XmlAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         timetable = source.getTimetable().value;
+        for (Appointment appointment : source.getAppointments()) {
+            appointments.add(new XmlAdaptedAppointment(appointment));
+        }
     }
 
     /**
@@ -139,6 +142,7 @@ public class XmlAdaptedPerson {
                 && Objects.equals(phone, otherPerson.phone)
                 && Objects.equals(email, otherPerson.email)
                 && Objects.equals(address, otherPerson.address)
-                && Objects.equals(timetable, otherPerson.timetable);
+                && Objects.equals(timetable, otherPerson.timetable)
+                && Objects.equals(appointments, otherPerson.appointments);
     }
 }
