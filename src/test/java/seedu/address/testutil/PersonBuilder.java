@@ -31,7 +31,6 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Timetable timetable;
-    private Appointment
     private Person person;
 
     public PersonBuilder() {
@@ -103,8 +102,15 @@ public class PersonBuilder {
      * Sets appointment with Date of the person that we are building
      */
     public PersonBuilder withAppointment(String... arg) {
-
-        this.appsetAppointment(list);
+        List<Appointment> list = new ArrayList<>();
+        for (String s : arg) {
+            try {
+                list.add(AddAppointmentParser.getAppointmentFromString(s));
+            } catch (seedu.address.logic.parser.exceptions.ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        this.person.setAppointment(list);
         return this;
     }
 

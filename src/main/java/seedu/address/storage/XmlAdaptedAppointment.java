@@ -26,8 +26,9 @@ public class XmlAdaptedAppointment {
     /**
      * Constructs an XmlAdaptedAppointment.
      * This is the no-arg constructor that is required by JAXB.
+     * @param invalidAppointment
      */
-    public XmlAdaptedAppointment() {}
+    public XmlAdaptedAppointment(String invalidAppointment) {}
 
     /**
      * Converts a given appointment into this class for JAXB use
