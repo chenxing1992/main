@@ -222,6 +222,7 @@ public class ModelManager extends ComponentManager implements Model {
         journalWindow.show();
     }
 
+    //@@author chenxing1992
     /**
      * Adds appointment to a person in the internal list.
      *
@@ -237,6 +238,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicatePersonChanged(person);
     }
 
+    //@@author chenxing1992
     /**
      * Removes an appointment from a person in the internal list
      *

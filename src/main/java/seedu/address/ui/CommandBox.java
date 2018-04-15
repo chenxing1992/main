@@ -120,6 +120,7 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.setText(answer);
     }
 
+    //@@author chenxing1992
     /**
      * Handles KeyPress Commands that are keyed with Shift button held down.
      *

@@ -55,6 +55,7 @@ public interface Model {
      */
     void addAppointment(ReadOnlyPerson target, Appointment appointment) throws PersonNotFoundException;
 
+    //@@author chenxing1992
     /**
      * Removes appointment from a person
      */

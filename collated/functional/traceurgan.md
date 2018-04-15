@@ -916,47 +916,6 @@ public class Journal implements ReadOnlyJournal {
         journalWindow.show();
     }
 
-    /**
-     * Adds appointment to a person in the internal list.
-     *
-     * @throws PersonNotFoundException if no such person exist in the internal list
-     */
-    public void addAppointment(ReadOnlyPerson target, Appointment appointment) throws PersonNotFoundException {
-        requireNonNull(target);
-        requireNonNull(appointment);
-        Person person = (Person) getPartner();
-        List<Appointment> list = target.getAppointments();
-        list.add(appointment);
-        person.setAppointment(list);
-        indicatePersonChanged(person);
-    }
-
-    /**
-     * Removes an appointment from a person in the internal list
-     *
-     * @throws PersonNotFoundException if no such person exist in the internal list
-     */
-    public void removeAppointment(ReadOnlyPerson target, Appointment appointment)
-            throws PersonNotFoundException {
-        requireNonNull(target);
-        requireNonNull(appointment);
-
-        Person person = (Person) getPartner();
-        List<Appointment> newApptList = person.getAppointments();
-        newApptList.remove(appointment);
-        person.setAppointment(newApptList);
-        indicatePersonChanged(person);
-
-    }
-
-    @Override
-    public String checkDate(int last) {
-        return journal.getDate(last);
-    }
-
-    //=========== Filtered Journal List Accessors =============================================================
-
-
 ```
 ###### /java/seedu/address/model/ModelManager.java
 ``` java
