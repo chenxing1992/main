@@ -424,6 +424,45 @@ background {
 ```
 ###### /java/seedu/address/ui/CommandBox.java
 ``` java
+    /**
+     * Handles KeyPress Commands that are keyed with Shift button held down.
+     *
+     * @param keyEvent Key event pressed by user with shift pressed.
+     */
+    private void handleShiftPress(KeyEvent keyEvent) {
+        switch (keyEvent.getCode()) {
+        case ALT:
+            keyEvent.consume();
+            commandTextField.positionCaret(0);
+            break;
+        case CONTROL:
+            keyEvent.consume();
+            commandTextField.positionCaret(commandTextField.getText().length());
+            break;
+        case DELETE:
+        case BACK_SPACE:
+            keyEvent.consume();
+            deleteByChunk();
+            break;
+        default:
+        }
+    }
+
+    /**
+     * Handles the key press event, {@code keyEvent}.
+     */
+    @FXML
+    private void handleKeyPress(KeyEvent keyEvent) {
+        if (keyEvent.isShiftDown()) {
+            handleShiftPress(keyEvent);
+        } else {
+            handleStandardPress(keyEvent);
+        }
+    }
+
+```
+###### /java/seedu/address/ui/CommandBox.java
+``` java
 
     /**
      * Handles KeyPress Commands that are not keyed with Shift button held down.
@@ -1840,6 +1879,53 @@ public class Person implements ReadOnlyPerson {
 }
 
 ```
+###### /java/seedu/address/model/ModelManager.java
+``` java
+    /**
+     * Adds appointment to a person in the internal list.
+     *
+     * @throws PersonNotFoundException if no such person exist in the internal list
+     */
+    public void addAppointment(ReadOnlyPerson target, Appointment appointment) throws PersonNotFoundException {
+        requireNonNull(target);
+        requireNonNull(appointment);
+        Person person = (Person) getPartner();
+        List<Appointment> list = target.getAppointments();
+        list.add(appointment);
+        person.setAppointment(list);
+        indicatePersonChanged(person);
+    }
+
+```
+###### /java/seedu/address/model/ModelManager.java
+``` java
+    /**
+     * Removes an appointment from a person in the internal list
+     *
+     * @throws PersonNotFoundException if no such person exist in the internal list
+     */
+    public void removeAppointment(ReadOnlyPerson target, Appointment appointment)
+            throws PersonNotFoundException {
+        requireNonNull(target);
+        requireNonNull(appointment);
+
+        Person person = (Person) getPartner();
+        List<Appointment> newApptList = person.getAppointments();
+        newApptList.remove(appointment);
+        person.setAppointment(newApptList);
+        indicatePersonChanged(person);
+
+    }
+
+    @Override
+    public String checkDate(int last) {
+        return journal.getDate(last);
+    }
+
+    //=========== Filtered Journal List Accessors =============================================================
+
+
+```
 ###### /java/seedu/address/model/Model.java
 ``` java
     /**
@@ -1847,6 +1933,9 @@ public class Person implements ReadOnlyPerson {
      */
     void addAppointment(ReadOnlyPerson target, Appointment appointment) throws PersonNotFoundException;
 
+```
+###### /java/seedu/address/model/Model.java
+``` java
     /**
      * Removes appointment from a person
      */
