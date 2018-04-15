@@ -641,7 +641,7 @@ Using http://api.nusmods.com/[NUSMods API], we can get the `WEEK_TEXT`, `DAY_TEX
 
 The following diagram shows how the Timetable class is represented.
 
-image::TimetableClass.png[width="700]
+image::TimetableClass.png[width="500"]
 A TimetableModule represents one NUSMods module. +
 The TimetableModuleSlots represents a particular class session of a TimetableModule. (e.g. Tutorial, Lecture, etc)
 
@@ -730,6 +730,48 @@ image::CompareTimetableSequenceDiagram.png[width="820"]
 Similar to <<Viewing a Timetable, Viewing a Timetable>>, the CompareTimetableCommand raises two Events:
 `ShowTimetableRequestEvent` and `TimetableChangedEvent`. This updates the relevant files and refreshes the
 Timetable Page displayed.
+
+We use a boolean isComparing in each TimetableModuleSlot to differentiate between the text to display for the normal
+Timetable and compared Timetable. +
+
+In _setUpTimetableInfoCompare()_ in `TimetableUtil`: +
+We call a method _setUpUnsortedModuleSlotsForComparing()_ that contains the following loop:
+[source,java]
+----
+    for (TimetableModuleSlot t : allUnsortedModulesSlots) {
+        t.setComparing(true);
+    }
+----
+
+In `TimetableModuleSlot`: +
+We override the toString() method:
+[source,java]
+----
+    @Override
+    public String toString() {
+        if (isComparing) {
+            return isEmpty
+                    ? "\"\"" : "\"X\"";
+        } else {
+            return isEmpty
+                    ? "\"\"" : "\"" + moduleCode + "\"";
+        }
+    }
+----
+
+The list of TimetableModuleSlots are formatted to look like an array, and is subsequently stored in a String which is stored in a file called `timetableDisplayInfo`.
+
+`FileTimetableStorage` replaces the timetable array declared in `TimetablePage.html`, which replaces the contents in the table cells of the HTML file.
+
+==== Design Considerations
+===== Aspect: Implementation of displaying common breaks
+* **Alternative 1 (current choice):** Replace all busy slots with 'X'
+** Pros: Easy to implement.
+** Cons: Not visually pleasing.
+* **Alternative 2:** Shade the cells a different colour.
+** Pros: More intuitive for the user.
+** Cons: More tedious to implement.
+
 
 // end::timetable[]
 |===
