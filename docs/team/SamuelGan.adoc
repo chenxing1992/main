@@ -1,0 +1,51 @@
+= Samuel Gan - Project Portfolio
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: NUSCouples
+
+---
+
+== Overview
+
+NUSCouples is a desktop application targeted at couples studying in the National University of Singapore (NUS).
+The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+
+== Summary of contributions
+
+* *Major enhancement*: implemented a *journal in _NUSCouples_.*
+** What it does: allows the user to write, edit and save journal entries.
+** Justification: this feature allows the user to record their thoughts and feelings as and when they want to. This is especially
+useful when one is in a relationship.
+
+* *Minor enhancement*: added a command to compare and display the common breaks in the NUSMods timetable of the person
+stored in NUSCouples along with one other given timetable. Removed dependency on addressbook as a middle man. Since our project is
+targeted towards couples, we only need to hold one person. Thus, I reimplemented addressbook methods to apply to only one person.
+
+* *Code contributed*: [https://github.com/CS2103JAN2018-T09-B4/main/blob/master/collated/functional/traceurgan.md[Functional code]]
+ [https://github.com/CS2103JAN2018-T09-B4/main/blob/master/collated/test/traceurgan.md[Test code]]
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+** Enhancements to existing features:
+*** Implemented journal (Pull request https://github.com/CS2103JAN2018-T09-B4/main/pull/89[#89])
+*** Removed addressbook and resolved exising merge conflicts (Pull request https://github.com/CS2103JAN2018-T09-B4/main/pull/162[#162])
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=journal]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=journal]
